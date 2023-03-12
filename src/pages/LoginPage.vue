@@ -1,21 +1,20 @@
 <template>
-  <q-page class="flex flex-center">
-    {{$t('success')}}
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
-    >
-  </q-page>
+  <q-layout>
+    <q-page-container>
+      <q-page class="flex flex-center">
+        <login/>
+      </q-page>
+    </q-page-container>
+  </q-layout>
 </template>
 
 <script>
-import {defineComponent} from 'vue'
-export default defineComponent(
-  {
-    name: "LoginPage"
-  }
-)
+import Login from "components/Login";
+export default {
+    name: "LoginPage",
+    components: {Login},
+}
+
 </script>
 
 <style scoped>

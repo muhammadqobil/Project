@@ -1,8 +1,6 @@
 export default {
-  title:{},
-  fp_captions:{},
-  captions:{},
-  fp_modules:{
-    login:'test uchun'
-  }
+  "title":{},
+  "captions":{},
+  "fp_captions":{},
+  "fp_modules":{}
 }

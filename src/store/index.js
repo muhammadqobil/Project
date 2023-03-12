@@ -1,26 +1,35 @@
 import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
+import SecureLS from "secure-ls";
+import createPersistedState from 'vuex-persistedstate'
 
-// import example from './module-example'
+let ls = new SecureLS({ isCompressions: false })
 
-/*
- * If not building with SSR mode, you can
- * directly export the Store instantiation;
- *
- * The function below can be async too; either use
- * async/await or return a Promise which resolves
- * with the Store instance.
- */
+import state from './module-example/state'
+import * as getters from './module-example/getters'
+import * as mutations from './module-example/mutations'
+import * as actions from './module-example/actions'
+
 
 export default store(function (/* { ssrContext } */) {
   const Store = createStore({
+    getters,
+    mutations,
+    actions,
+    state,
     modules: {
       // example
     },
-
-    // enable strict mode (adds overhead!)
-    // for dev mode and --debug builds only
-    strict: process.env.DEBUGGING
+    plugins: [
+      createPersistedState({
+        storage:{
+          getItem: key => ls.get(key),
+          setItem: (key, value) => ls.set(key , value),
+          removeItem: key => ls.remove(key)
+        }
+      })
+    ],
+    strict: process.env.NODE_ENV !== 'production'
   })
 
   return Store

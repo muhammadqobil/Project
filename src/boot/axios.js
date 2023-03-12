@@ -1,24 +1,58 @@
 import { boot } from 'quasar/wrappers'
-import axios from 'axios'
+import Axios from 'axios'
+import {cfghttp} from '../utils/constants'
 
-// Be careful when using SSR for cross-request state pollution
-// due to creating a Singleton instance here;
-// If any client changes this (global) instance, it might be a
-// good idea to move this instance creation inside of the
-// "export default () => {}" function below (which runs individually
-// for each client)
-const api = axios.create({ baseURL: 'https://api.example.com' })
-
-export default boot(({ app }) => {
-  // for use inside Vue files (Options API) through this.$axios and this.$api
-
-  app.config.globalProperties.$axios = axios
-  // ^ ^ ^ this will allow you to use this.$axios (for Vue Options API form)
-  //       so you won't necessarily have to import axios in each vue file
-
-  app.config.globalProperties.$api = api
-  // ^ ^ ^ this will allow you to use this.$api (for Vue Options API form)
-  //       so you can easily perform requests against your app's API
+const axios = Axios.create({
+  baseURL: cfghttp.BASE_URL,
+  timeout: cfghttp.BASE_TIMEOUT,
+  withCredentials:true
 })
+export default boot(({ app , store, router}) => {
+  axios.interceptors.response.use(response => {
+    store.commit("decrementAjaxRequestsCnt");
+    return response
+  }, error => {
+    store.commit("decrementAjaxRequestsCnt");
+    if (!error.response) {
+      return Promise.reject({
+        errorCode: -200,
+        errorDescription: "",
+        errorMessage: app.i18n.global.t("http.base_error")
+      });
+    }
+    if (!error.response.data) {
+      return Promise.reject({
+        errorCode: -200,
+        errorDescription: "",
+        errorMessage: app.i18n.global.t("http.base_error")
+      });
+    }
+    if (error.response.data.ERROR.status === 401) {
+      store.commit('clearUserSession');
+      router.push('/login');
+      return Promise.reject({
+        errorCode: 401,
+        errorDescription: "",
+        errorMessage: app.i18n.global.t("http.session_timeout")
+      });
+    }
+    return Promise.reject({
+      errorCode: error.response.data.ERROR.code,
+      errorDescription: error.response.data.ERROR.description,
+      errorMessage: error.response.data.ERROR.message
+    });
 
-export { api }
+  })
+
+  axios.interceptors.request.use(function (request) {
+      if (store.state.user !== null) {
+        request.headers.Authorization = `Bearer ${store.state.user}`;
+      }
+      store.commit("incrementAjaxRequestsCnt");
+      return request;
+    },
+    function (error) {
+      return Promise.reject(error);
+    })
+  app.config.globalProperties.$axios = axios;
+})
