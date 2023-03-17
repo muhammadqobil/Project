@@ -3,7 +3,7 @@ import { createStore } from 'vuex'
 import SecureLS from "secure-ls";
 import createPersistedState from 'vuex-persistedstate'
 
-let ls = new SecureLS({ isCompressions: false })
+let ls = new SecureLS({ isCompression : false })
 
 import state from './module-example/state'
 import * as getters from './module-example/getters'
