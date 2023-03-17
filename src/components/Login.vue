@@ -107,7 +107,8 @@ export default {
         username:null,
         password:null,
         remember:false,
-        lang:'uz'
+        lang:'uz',
+        name:''
       }
     }
   },
