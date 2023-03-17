@@ -7,6 +7,7 @@ export default function () {
     ],
     user:null,
     ajaxRequestsCnt:0,
-    userActions:[]
+    userActions:[],
+    globalError:undefined,
   }
 }

@@ -25,7 +25,10 @@ module.exports = configure(function (ctx) {
     boot: [
       'i18n',
       'axios',
-      'global-mixin'
+      'global-mixin',
+      'notify-defaults',
+      'dateutil-init',
+      'cookie'
     ],
 
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-css
@@ -99,7 +102,7 @@ module.exports = configure(function (ctx) {
       // directives: [],
 
       // Quasar plugins
-      plugins: ['Notify','Loading', 'Dialog']
+      plugins: ['Notify', 'Cookies', 'AppFullscreen','Dialog','Loading']
     },
 
     // animations: 'all', // --- includes all animations

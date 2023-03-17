@@ -15,3 +15,10 @@ export function setUser(state , val){
 export function clearUserSession(state){
   state.user=''
 }
+export function setUserAals (state , val){
+  state.userActions.splice(0 , state.userActions.length , ...val)
+}
+
+export function setGlobalError(state, val) {
+  state.globalError = val;
+}

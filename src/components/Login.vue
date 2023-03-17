@@ -82,6 +82,7 @@
       <div class="overlay">
         <div class="overlay-panel overlay-left">
           <h4 class="text-bold no-margin">Welcome Back!</h4>
+          {{$dateutil.formatDate(new Date().getTime() , 'DD.MM.YYYY')}}
           <p>To keep connected with us please login with your personal info</p>
           <q-btn class="button ghost" @click="signInButton">Sign UP</q-btn>
         </div>
@@ -108,12 +109,11 @@ export default {
         password:null,
         remember:false,
         lang:'uz',
-        name:''
       }
     }
   },
   methods:{
-    ...mapMutations['setUser'],
+    ...mapMutations['setUser' , 'setUserAals'],
     ...mapGetters(['getUser']),
     signUpButton(){
       this.$refs.container.classList.add(["right-panel-active"])
@@ -126,8 +126,21 @@ export default {
         if(!response.data){
           return
         };
+        if (this.bean.remember) {
+          this.$cookie.setUserLogin(response.data.user.login);
+        } else {
+          this.$cookie.clearUserLogin();
+        }
         this.setUser(response.data.user)
-      } )
+        this.setUserAals(response.data.userAals)
+        // if (this.getPath) {
+        //   this.$router.push(this.getPath)
+        // } else {
+        //   this.$router.push('/');
+        // }
+      } ).catch((error)=>{
+        this.showError(error)
+      })
     },
   },
   mounted() {
