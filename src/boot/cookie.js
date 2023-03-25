@@ -1,6 +1,5 @@
 import {Cookies} from 'quasar'
 
-
 const cookieWorker = {
   setUserLogin: function (userLogin) {
     Cookies.set("user_name", userLogin);

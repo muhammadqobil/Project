@@ -3,7 +3,7 @@ import { createStore } from 'vuex'
 import SecureLS from "secure-ls";
 import createPersistedState from 'vuex-persistedstate'
 
-let ls = new SecureLS({ isCompression : false })
+let ls = new SecureLS({ isCompression : false });
 
 import state from './module-example/state'
 import * as getters from './module-example/getters'
@@ -31,6 +31,5 @@ export default store(function (/* { ssrContext } */) {
     ],
     strict: process.env.NODE_ENV !== 'production'
   })
-
   return Store
 })
