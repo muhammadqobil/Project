@@ -7,7 +7,7 @@ const axios = Axios.create({
   timeout: cfghttp.BASE_TIMEOUT,
   withCredentials:true
 })
-export default boot(({ app , store, router}) => {
+export default boot(({ app , store, router }) => {
   axios.interceptors.response.use(response => {
     store.commit("decrementAjaxRequestsCnt");
     return response

@@ -26,6 +26,17 @@
       </q-form>
     </div>
     <div class="form-container sign-in-container">
+      <div class="full-width flex justify-end absolute" style="z-index: 100;">
+        <q-btn-toggle
+          v-model="language"
+          :options="languages"
+          toggle-color="primary"
+          dense
+          no-caps
+          flat
+          size="15px"
+        />
+      </div>
       <q-form @submit.prevent="onSubmit" class="q-gutter-md row">
         <h4 class="text-bold no-margin">Create Account</h4>
         <q-input
@@ -112,6 +123,23 @@ export default {
       }
     }
   },
+  computed:{
+    language: {
+      get() {
+        return this.$i18n.locale==undefined?'uz':this.$i18n.locale;
+      },
+      set(value) {
+        this.$i18n.locale = value;
+      }
+    },
+    languages: function () {
+      var locs = [];
+      this.$store.state.appLocales.forEach(loc => {
+        locs.push({label: loc.name, value: loc.code});
+      });
+      return locs;
+    }
+  },
   methods:{
     ...mapMutations['setUser' , 'setUserAals'],
     ...mapGetters(['getUser']),
@@ -144,6 +172,10 @@ export default {
     },
   },
   mounted() {
+    if(this.$cookie.isHasUserLogin()){
+      this.bean.username = this.$cookie.getUserLogin()
+      this.bean.remember = true
+    }
   }
 }
 

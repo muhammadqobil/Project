@@ -8,6 +8,7 @@ export default function () {
     user:null,
     ajaxRequestsCnt:0,
     userActions:[],
-    globalError:undefined,
+    globalError : undefined,
+    path:''
   }
 }
