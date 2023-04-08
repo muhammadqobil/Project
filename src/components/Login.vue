@@ -141,7 +141,7 @@ export default {
     }
   },
   methods:{
-    ...mapMutations['setUser' , 'setUserAals'],
+    ...mapMutations(['setUser' , 'setUserAals']),
     ...mapGetters(['getUser']),
     signUpButton(){
       this.$refs.container.classList.add(["right-panel-active"])
