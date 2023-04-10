@@ -104,6 +104,7 @@
         </div>
       </div>
     </div>
+    <div class="absolute" style="z-index: 1000">{{getUser()}}</div>
   </div>
 </template>
 
@@ -141,7 +142,7 @@ export default {
     }
   },
   methods:{
-    ...mapMutations['setUser' , 'setUserAals'],
+    ...mapMutations['setUser','setUserAals'],
     ...mapGetters(['getUser']),
     signUpButton(){
       this.$refs.container.classList.add(["right-panel-active"])

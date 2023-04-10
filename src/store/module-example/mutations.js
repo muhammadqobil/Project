@@ -10,7 +10,7 @@ export function resetAjaxRequestsCnt(state){
 }
 
 export function setUser(state , val){
-  state.user=val
+  state.user = val
 }
 export function clearUserSession(state){
   state.user = '';

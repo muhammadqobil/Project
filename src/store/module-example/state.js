@@ -5,7 +5,7 @@ export default function () {
       {'name': 'Узбек', 'code': 'uk'},
       {'name': 'O`zbek', 'code': 'uz'}
     ],
-    user:null,
+    user:'111111',
     ajaxRequestsCnt:0,
     userActions:[],
     globalError : undefined,
