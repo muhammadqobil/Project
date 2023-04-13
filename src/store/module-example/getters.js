@@ -9,5 +9,8 @@ export function getGlobalError(state) {
   return state.globalError;
 }
 export function getPath(state){
-  return state.path
+  return state.path;
+}
+export function getLoading (state){
+  return state.loading;
 }

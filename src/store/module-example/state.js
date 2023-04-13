@@ -9,6 +9,7 @@ export default function () {
     ajaxRequestsCnt:0,
     userActions:[],
     globalError : undefined,
-    path:''
+    path:'',
+    loading:true
   }
 }
