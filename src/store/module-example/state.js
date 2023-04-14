@@ -6,10 +6,10 @@ export default function () {
       {'name': 'O`zbek', 'code': 'uz'}
     ],
     user:null,
-    ajaxRequestsCnt:0,
-    userActions:[],
-    globalError : undefined,
-    path:'',
-    loading:true
+    ajaxRequestsCnt: 0,
+    userActions: [],
+    globalError: undefined,
+    path: '',
+    loading: true
   }
 }

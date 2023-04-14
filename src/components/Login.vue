@@ -108,7 +108,6 @@
 </template>
 
 <script>
-
 import {urls} from "src/utils/constants";
 import {mapMutations , mapGetters} from 'vuex'
 export default {
@@ -161,11 +160,11 @@ export default {
         }
         this.setUser(response.data.user)
         this.setUserAals(response.data.userAals)
-        // if (this.getPath) {
-        //   this.$router.push(this.getPath)
-        // } else {
-        //   this.$router.push('/');
-        // }
+        if (this.getPath) {
+          this.$router.push(this.getPath)
+        } else {
+          this.$router.push('/');
+        }
       } ).catch((error)=>{
         this.showError(error)
       })

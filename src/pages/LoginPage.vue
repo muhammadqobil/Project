@@ -1,29 +1,16 @@
 <template>
-  <q-layout>
-    <error-dialog/>
-    <q-page-container>
-      <q-linear-progress indeterminate stripe rounded style="height: 5px" v-if="$store.state.ajaxRequestsCnt>0"/>
-      <!-- This is where pages get injected -->
-      <transition
-        appear
-        enter-active-class="animated bounceInLeft"
-        leave-active-class="animated bounceOutRight"
-        :duration="300"
-      >
-      </transition>
-      <q-page class="flex flex-center">
-        <login/>
-      </q-page>
-    </q-page-container>
-  </q-layout>
+  <q-page padding class="row items-center justify-center q-pa-md no-border no-padding">
+    <q-card bordered class="fit flex justify-center no-border no-shadow">
+      <login/>
+    </q-card>
+  </q-page>
 </template>
 
 <script>
 import Login from "components/Login";
-import ErrorDialog from "components/base/ErrorDialog";
 export default {
     name: "LoginPage",
-    components: {ErrorDialog, Login},
+    components: {Login},
 }
 
 </script>
