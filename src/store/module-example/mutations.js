@@ -23,3 +23,6 @@ export function setUserAals (state , val){
 export function setGlobalError(state, val) {
   state.globalError = val;
 }
+export function setLoading(state , val){
+  state.loading = val;
+}
