@@ -13,7 +13,6 @@ export function setToken(state , val){
   state.token=val
 }
 export function setUser(state , val){
-  console.log('111jwt=>', val)
   state.user=val
 }
 export function clearUserSession(state){

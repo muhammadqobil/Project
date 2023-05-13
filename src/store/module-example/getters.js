@@ -1,4 +1,5 @@
 export function getUser (state) {
+  alert(state.user)
   return state.user
 }
 export function getToken (state) {
