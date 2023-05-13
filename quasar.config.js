@@ -28,7 +28,8 @@ module.exports = configure(function (ctx) {
       'global-mixin',
       'notify-defaults',
       'dateutil-init',
-      'cookie'
+      'cookie',
+      'router-init'
     ],
 
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-css

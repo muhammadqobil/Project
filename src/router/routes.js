@@ -1,12 +1,12 @@
 
 const routes = [
-  // {
-  //   path: '/',
-  //   component: () => import('layouts/BaseLayout.vue'),
-  //   children: [
-  //     {path: '', name: 'home', component: () => import('pages/Home.vue')},
-  //   ]
-  // },
+  {
+    path: '',
+    component: () => import('layouts/BaseLayout.vue'),
+    children: [
+      {path: '/', name: 'home', component: () => import('pages/Home.vue')},
+    ]
+  },
   {
     path: '',
     component: () => import('layouts/EmptyLayout.vue'),

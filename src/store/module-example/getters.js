@@ -1,6 +1,9 @@
 export function getUser (state) {
   return state.user
 }
+export function getToken (state) {
+  return state.token
+}
 export function isHaveError(state){
   return !!state.globalError && state.globalError.type != 'warning';
 }

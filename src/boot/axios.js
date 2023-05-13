@@ -46,7 +46,7 @@ export default boot(({ app , store, router }) => {
 
   axios.interceptors.request.use(function (request) {
       if (store.state.user !== null) {
-        request.headers.Authorization = `Bearer ${store.state.user}`;
+        request.headers.Authorization = `Bearer ${store.state.user.token}`;
       }
       store.commit("incrementAjaxRequestsCnt");
       return request;

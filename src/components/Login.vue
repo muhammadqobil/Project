@@ -40,7 +40,7 @@
       <q-form @submit.prevent="onSubmit" class="q-gutter-md row">
         <h4 class="text-bold no-margin">Create Account</h4>
         <q-input
-          v-model="bean.username"
+          v-model="bean.login"
           outlined
           dense
           :label="$t('login.l_username')"
@@ -115,7 +115,7 @@ export default {
     return{
       viewPsw:false,
       bean:{
-        username:null,
+        login:null,
         password:null,
         remember:false,
         lang:'uz',
@@ -140,7 +140,7 @@ export default {
     }
   },
   methods:{
-    ...mapMutations(['setUser' , 'setUserAals']),
+    ...mapMutations(['setUser' , 'setUserAals' , 'setToken']),
     ...mapGetters(['getUser']),
     signUpButton(){
       this.$refs.container.classList.add(["right-panel-active"])
@@ -149,7 +149,7 @@ export default {
       this.$refs.container.classList.remove(["right-panel-active"])
     },
     onSubmit(){
-      this.$axios.post(urls.LOGIN , 'username=' + this.bean.username + '&password=' + this.bean.password + '&remember=' + this.bean.remember + '&lang=' + this.$i18n.locale , {headers: {'content-type': 'application/x-www-form-urlencoded'}}).then( response => {
+      this.$axios.post(urls.LOGIN , this.bean , {headers: {'content-type': 'application/json'}}).then( response => {
         if(!response.data){
           return
         };
@@ -159,7 +159,7 @@ export default {
           this.$cookie.clearUserLogin();
         }
         this.setUser(response.data.user)
-        this.setUserAals(response.data.userAals)
+        this.setUserAals(response.data.user.roles)
         if (this.getPath) {
           this.$router.push(this.getPath)
         } else {
