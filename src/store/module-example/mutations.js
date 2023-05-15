@@ -16,8 +16,8 @@ export function setUser(state , val){
   state.user=val
 }
 export function clearUserSession(state){
-  state.user = '';
-  state.path = '';
+  state.user = null;
+  state.path = null;
 }
 export function setUserAals (state , val){
   state.userActions.splice(0 , state.userActions.length , ...val)

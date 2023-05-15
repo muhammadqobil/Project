@@ -27,11 +27,21 @@ export default boot(({ app , store, router }) => {
         errorMessage: app.i18n.global.t("http.base_error")
       });
     }
-    if (error.response.data.ERROR.status === 401) {
+    if (error.response.status === 401) {
       store.commit('clearUserSession');
       router.push('/login');
       return Promise.reject({
         errorCode: 401,
+        errorDescription: "",
+        errorMessage: app.i18n.global.t("http.session_timeout")
+      });
+    }
+    console.log('403',error.response);
+    if (error.response.status === 403) {
+      store.commit('clearUserSession');
+      router.push('/login');
+      return Promise.reject({
+        errorCode: 403,
         errorDescription: "",
         errorMessage: app.i18n.global.t("http.session_timeout")
       });

@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md">
-    <q-layout view="lHh Lpr lff" container style="height: 300px" class="shadow-2 rounded-borders">
+    <q-layout view="lHh Lpr lff" container style="height: 500px" class="shadow-2 rounded-borders">
       <q-header elevated class="bg-cyan-8">
         <q-toolbar>
           <q-toolbar-title>Header</q-toolbar-title>
@@ -31,9 +31,11 @@
                 <q-icon name="star" />
               </q-item-section>
 
-              <q-item-section>
-                Star
-              </q-item-section>
+              <router-link :to="{name:'home'}">
+                <q-item-section>
+                  Star
+                </q-item-section>
+              </router-link>
             </q-item>
 
             <q-item clickable v-ripple>
@@ -77,12 +79,24 @@
 </template>
 
 <script>
+import {urls} from "src/utils/constants";
+
 export default {
   name: "BaseLayout",
   data(){
     return{
       drawer : false
     }
+  },
+  methods:{
+    getBranches(){
+      this.$axios.get(urls.TEST).then(res=>{
+
+      }).catch(error=>{})
+    }
+  },
+  mounted() {
+    this.getBranches()
   }
 }
 </script>
