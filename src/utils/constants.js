@@ -7,6 +7,6 @@ export const cfghttp = {
 
 export const urls = {
   LOGIN:"api/v1/home/login",
-  BRANCHES:"api/v1/admin/branches",
+  BRANCHES:"api/v1/admin/branches/all",
   TEST:"api/v1/home/test"
 }

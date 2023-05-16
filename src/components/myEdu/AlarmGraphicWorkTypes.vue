@@ -2,7 +2,6 @@
   <div>
     <q-table
       ref="table"
-      :title="$t('titles.Regions')"
       :row-key="rowKey"
       :data="data"
       :dense="$q.screen.lt.md"
@@ -111,7 +110,7 @@ export default {
   mixins: [StandartTable],
   data() {
     return {
-      apiUrl: urls.ALARM_GRAPHIC_WORK_TYPES,
+      apiUrl: urls.BRANCHES,
       loading: false,
       rowKey: 'id',
       selectedRows: [],

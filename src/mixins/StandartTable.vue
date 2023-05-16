@@ -19,7 +19,7 @@
       },
       refreshData(props) {
         this.loading = true;
-        this.pagedGet(this.apiUrl, props.pagination, props.filter)
+        this.pagedGet(this.apiUrl + this.tableFilterQuery(props.pagination) , props.filter)
           .then(response => {
             if (!response)
               return;

@@ -29,3 +29,6 @@ export function setGlobalError(state, val) {
 export function setLoading(state , val){
   state.loading = val;
 }
+export function setPath(state, val){
+  state.path = val
+}

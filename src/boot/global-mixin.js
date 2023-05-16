@@ -2,7 +2,7 @@ import {boot} from "quasar/wrappers";
 import {i18n} from "boot/i18n";
 
 // "async" is optional
-export default boot(({app, router, store, Vue}) => {
+export default boot(({app , store, router }) => {
   console.log('mix=>' , app)
   app.mixin({
       data() {
@@ -133,8 +133,8 @@ export default boot(({app, router, store, Vue}) => {
             color: 'primary',
             position: 'center',
             actions: [
-              {label: i18n.t('system.No'), color: 'white'},
-              {label: i18n.t('system.Yes'), color: 'yellow', handler: callback},
+              {label: app.i18n.global.t('system.No'), color: 'white'},
+              {label: app.i18n.global.t('system.Yes'), color: 'yellow', handler: callback},
             ]
           })
         },
@@ -143,8 +143,8 @@ export default boot(({app, router, store, Vue}) => {
             title: title,
             message: message,
             persistent: true,
-            ok: i18n.t('system.Ok'),
-            cancel: i18n.t('system.Cancel'),
+            ok: app.i18n.global.t('system.Ok'),
+            cancel: app.i18n.global.t('system.Cancel'),
             class: 'bg-primary text-white',
             color: 'white'
 
@@ -154,16 +154,16 @@ export default boot(({app, router, store, Vue}) => {
           return [7,10,20,25,50,100]
         },
         paginationText(firstRowIndex, endRowIndex, totalRowsNumber) {
-          return i18n.t('system.pagination_text', [firstRowIndex, endRowIndex, totalRowsNumber]);
+          return app.i18n.global.t('system.pagination_text', [firstRowIndex, endRowIndex, totalRowsNumber]);
         },
         selectedRowsText(numberOfRows) {
-          return i18n.t('system.selected_rows_text', [numberOfRows]);
+          return app.i18n.global.t('system.selected_rows_text', [numberOfRows]);
         },
         perPageText() {
-          return i18n.t('system.per_page_text');
+          return app.i18n.global.t('system.per_page_text');
         },
         noDataText() {
-          return i18n.t('system.no_data');
+          return app.i18n.global.t('system.no_data');
         },
         number_format(number, decimals, thousands_sep) {
           return number ? number.toFixed(decimals >= 0 ? decimals : 2).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1' + (thousands_sep ? thousands_sep : ' ')) : "0"
