@@ -1,7 +1,7 @@
 // app global css in SCSS form
 
 //$primary   : #35699B;
-$primary   : #FF4B2B;
+$primary   : #0097A7;
 $secondary : #084887;
 
 $tertiary  : #efefef;
@@ -29,3 +29,7 @@ $state6  : #4CAF50;
 $state7  : #f44336;
 $state8  : #FF5722;
 $state9  : #E91E63;
+
+.bg-primary {
+  background-color: $primary !important;
+}

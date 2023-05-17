@@ -2,7 +2,8 @@ import {boot} from "quasar/wrappers";
 import {i18n} from "boot/i18n";
 
 // "async" is optional
-export default async ({app, router, store, Vue}) => {
+export default boot(({app , store, router }) => {
+  console.log('mix=>' , app)
   app.mixin({
       data() {
         return {}
@@ -359,4 +360,4 @@ export default async ({app, router, store, Vue}) => {
     }
   )
   ;
-}
+})

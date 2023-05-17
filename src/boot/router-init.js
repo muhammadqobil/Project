@@ -1,4 +1,5 @@
 import {boot} from "quasar/wrappers";
+import {setPath} from "src/store/module-example/mutations";
 
 export default boot(({app, router, store, Vue})=> {
   router.beforeResolve((to, from, next) => {
@@ -13,6 +14,7 @@ export default boot(({app, router, store, Vue})=> {
         next();
         return;
       } else {
+        setPath(to.path)
         next('/login');
         return;
       }

@@ -19,20 +19,20 @@
       },
       refreshData(props) {
         this.loading = true;
-        this.pagedGet(this.apiUrl, props.pagination, props.filter)
+        let allBean = Object.assign(props.pagination , props.filter)
+        this.pagedGet(this.apiUrl + this.tableFilterQuery(allBean) )
           .then(response => {
             if (!response)
               return;
             this.pagination = props.pagination;
             this.pagination.rowsNumber = response.data.total;
-            this.data.splice(0, this.data.length, ...response.data.rows);
-
-            this.last_refresh = response.data.last_refresh;
-            this.wait_time = response.data.wait_time;
-
-            if(this.data.length>0 && this.expansable && this.data[0]){
-              this.expanded.push(this.data[0].id);
-            }
+            this.data.splice(0, this.data.length, ...response.data);
+            // this.last_refresh = response.data.last_refresh;
+            // this.wait_time = response.data.wait_time;
+            //
+            // if(this.data.length>0 && this.expansable && this.data[0]){
+            //   this.expanded.push(this.data[0].id);
+            // }
           })
           .catch(e => {
             this.showError(e);
