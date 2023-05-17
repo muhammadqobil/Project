@@ -1,7 +1,7 @@
 <template>
-  <div class="q-pa-md">
-    <q-layout view="lHh Lpr lff" container style="height: 500px" class="shadow-2 rounded-borders">
-      <q-header elevated class="bg-cyan-8">
+  <div>
+    <q-layout view="lHh Lpr lff" container style="height: calc(100vh)" class="shadow-2 rounded-borders">
+      <q-header elevated class="bg-primary">
         <q-toolbar>
           <q-toolbar-title>Header</q-toolbar-title>
           <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
@@ -11,53 +11,38 @@
       <q-drawer
         v-model="drawer"
         show-if-above
-        :width="200"
+        :width="300"
         :breakpoint="400"
       >
-        <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
-          <q-list padding>
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="inbox" />
-              </q-item-section>
-
-              <q-item-section>
-                Inbox
-              </q-item-section>
-            </q-item>
-
-            <q-item active clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="star" />
-              </q-item-section>
-
-              <router-link :to="{name:'home'}">
-                <q-item-section>
-                  Star
+        <q-scroll-area
+          style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd"
+          :thumb-style="thumbStyle" :bar-style="barStyle">
+          <q-expansion-item
+            default-opened
+            v-model="showOpened"
+            :label="$t('fp_captions.login')"
+            :label-lines="2"
+            :caption-lines="3"
+            expand-separator
+            icon="mdi-bank"
+            expand-icon-class="text-white"
+            class="bg-primary text-white"
+          >
+            <q-list class="q-pl-none  bg-secondary">
+              <q-item
+                to="/login"
+                clickable
+                v-ripple
+                active-class="text-white text-italic text-bold"
+              >
+                <q-item-section avatar class="q-pl-md q-pr-none">
+                  <q-icon name="mdi-file"/>
                 </q-item-section>
-              </router-link>
-            </q-item>
+                <q-item-section class="q-pl-none">test</q-item-section>
+              </q-item>
+            </q-list>
 
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="send" />
-              </q-item-section>
-
-              <q-item-section>
-                Send
-              </q-item-section>
-            </q-item>
-
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="drafts" />
-              </q-item-section>
-
-              <q-item-section>
-                Drafts
-              </q-item-section>
-            </q-item>
-          </q-list>
+          </q-expansion-item>
         </q-scroll-area>
 
         <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 150px">
@@ -85,7 +70,19 @@ export default {
   name: "BaseLayout",
   data(){
     return{
-      drawer : false
+      drawer : false,
+      showOpened: true,
+      thumbStyle: {
+        right: '4px',
+        borderRadius: '5px',
+        width: '5px',
+      },
+
+      barStyle: {
+        right: '2px',
+        borderRadius: '5px',
+        width: '5px',
+      },
     }
   },
   methods:{

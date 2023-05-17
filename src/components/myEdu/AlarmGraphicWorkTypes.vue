@@ -3,7 +3,7 @@
     <q-table
       ref="table"
       :row-key="rowKey"
-      :data="data"
+      :rows="data"
       :dense="$q.screen.lt.md"
       :grid="$q.screen.xs"
       :columns="columns"
@@ -28,6 +28,29 @@
       </template>
       <template v-slot:top="props">
         <div class="fit row items-center">
+          <q-select
+            v-model="filter.branches"
+            emit-value
+            outlined
+            map-options
+            :options="data"
+            option-value="id"
+            option-label="name"
+            :label="$t('fp_captions.l_mes')"
+            stack-label
+            transition-show="scale"
+            transition-hide="scale"
+            class="col-xs-12 col-md-2 col-lg-3 q-pl-md"
+            dense>
+            <template v-slot:append>
+              <q-icon name="close" @click.stop="filter.branches = null"
+                                                  class="cursor-pointer"/>
+            </template>
+            <template v-slot:selected-item="props">
+              <div>{{ props.opt.name}}</div>
+            </template>
+
+          </q-select>
           <q-space/>
           <q-btn-group>
             <q-btn icon="add" class="bg-primary text-white" @click="rowAdd" dense>
@@ -68,23 +91,21 @@
 
 
       <div class="row">
-        <q-input v-model="bean.name_ru" :placeholder="$t('captions.l_name_ru')"
-                 :label="$t('captions.l_name_ru')"
-                 class="q-pa-md col-xs-12 col-sm-4 col-md-4 col-lg-4" dense
+        <q-input v-model="bean.name" :placeholder="$t('captions.l_name')"
+                 :label="$t('captions.l_name')"
+                 class="q-pa-md col-xs-12 col-sm-12 col-md-12 col-lg-12" dense
                  lazy-rules :rules="[val => !!val || this.$t('system.field_is_required')]">
         </q-input>
-        <q-input v-model="bean.name_uz" :placeholder="$t('captions.l_name_uz')"
-                 :label="$t('captions.l_name_uz')"
-                 class="q-pa-md col-xs-12 col-sm-4 col-md-4 col-lg-4" dense
-                 lazy-rules :rules="[val => !!val || this.$t('system.field_is_required')]">
-        </q-input>
-        <q-input v-model="bean.name_uk" :placeholder="$t('captions.l_name_uk')"
-                 :label="$t('captions.l_name_uk')"
-                 class="q-pa-md col-xs-12 col-sm-4 col-md-4 col-lg-4" dense
-                 lazy-rules :rules="[val => !!val || this.$t('system.field_is_required')]">
-        </q-input>
+          <q-input v-model="bean.phone" :placeholder="$t('captions.l_phone')"
+                   :label="$t('captions.l_phone')"
+                   mask="(##) ### - ## - ##"
+                   fill-mask
+                   unmasked-value
+                   class="q-pa-md col-xs-12 col-sm-12 col-md-12 col-lg-12" dense
+                   lazy-rules :rules="[val => !!val || this.$t('system.field_is_required')]">
+          </q-input>
 
-        <q-input v-model="bean.description" :placeholder="$t('captions.l_description')"
+        <q-input v-model="bean.address" :placeholder="$t('captions.l_description')"
                  :label="$t('captions.l_description')"
                  class="q-pa-md col-xs-12 col-sm-12 col-md-12 col-lg-12" dense
         >
@@ -121,7 +142,9 @@ export default {
         rowsPerPage: 10,
         rowsNumber: 0
       },
-
+      filter:{
+        branches:null
+      },
       columns: [
         {
           name: 'id',
@@ -132,33 +155,16 @@ export default {
           style: 'width: 1rem'
         },
         {
-          name: 'name_ru',
-          field: row => row.name_ru,
-          label: this.$t('captions.l_name_ru'),
-          format: val => `${val}`,
-          align: 'left',
-          classes: 'col-1',
-        },
-        {
-          name: 'name_uz',
-          field: row => row.name_uz,
-          label: this.$t('captions.l_name_uz'),
-          format: val => `${val}`,
-          align: 'left',
-          classes: 'col-1',
-        },
-
-        {
-          name: 'name_uk',
-          field: row => row.name_uk,
-          label: this.$t('captions.l_name_uk'),
+          name: 'name',
+          field: row => row.name,
+          label: this.$t('captions.l_name'),
           format: val => `${val}`,
           align: 'left',
           classes: 'col-1',
         },
         {
           name: 'description',
-          field: row => row.description,
+          field: row => row.address,
           label: this.$t('captions.l_description'),
           format: val => `${val}`,
           align: 'left',
@@ -168,10 +174,9 @@ export default {
       data: [],
       beanDefault: {
         id: null,
-        name_ru: null,
-        name_uz: null,
-        name_uk: null,
-        description: null
+        name: null,
+        phone: null,
+        address: null
       },
       bean: {},
       formDialog: false,
